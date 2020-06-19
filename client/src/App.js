@@ -9,7 +9,6 @@ import Navbar from './components/NavBar';
 import Home from './components/Home';
 import Reports from './components/Reports';
 import axios from 'axios'
-import { Search } from 'semantic-ui-react';
 import UserProfile from './components/User/UserProfile';
 
 
@@ -23,6 +22,18 @@ function App() {
     })
     .catch(err => {console.log(err)})
   }, []) 
+
+  async function updateBug(id){
+    axios.put(`/api/bugs/${id}`)
+      .then( res => {
+        const updatedBugs = bugs.map( b => {
+        if (b.id === res.data.id)
+          return res.data;
+        return b;
+      });
+      setBugs({ updatedBugs, });
+    })
+  }
 
   async function addBug(bug){
     const res = axios.post('/api/bugs', bug)
