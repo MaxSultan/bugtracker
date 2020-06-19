@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
 import { UserConsumer } from './UserProvider'
+import UserForm from './UserForm'
 
 export default function User() {
+    const [toggleForm, setToggleForm] = useState(false)
+
     return (
         <UserConsumer>
             {value => (
@@ -21,7 +24,8 @@ export default function User() {
                         </Card>
                         <Image src={value.avatar} avatar style={{height:'200px', width:'150px'}}/>
                     </div>
-                    <Button>Edit Profile</Button>
+                    <Button onClick={() => setToggleForm(!toggleForm)}>Edit Profile</Button>
+                    {toggleForm && <UserForm/>}
                 </div>
             )}
             

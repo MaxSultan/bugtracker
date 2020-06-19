@@ -37,7 +37,7 @@ function App() {
         <Route exact path='/reports' component={Reports}/>
         <Route exact path='/home' render={(props) => (<Home {...props} bugs={bugs}/>)}/>
         <Route exact path='/user' render={(props) => (<UserProfile {...props} bugs={bugs}/>)}/>
-        <Route render={(props) => (<Search {...props} bugs={bugs}/>)}/>
+        {/* <Route render={(props) => (<Search {...props} bugs={bugs}/>)}/> */}
       </Switch>
       <br/>
     </div>

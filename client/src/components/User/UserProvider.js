@@ -14,6 +14,10 @@ export default class extends Component{
         bugs: [],
     }
 
+    updateUser = (user) => {
+        this.setState({...user})
+    }
+
     render(){
         return(
             <UserContext.Provider value={this.state}>
