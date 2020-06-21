@@ -4,17 +4,7 @@ import Bug from './Bug'
 import {Table, Container, Button, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
-const Bugs = ({ getBugs, }) => {
-    const [bugs, setBugs] = useState([])
-
-    async function getBugs(){
-        const res = await axios.get('/api/bugs')
-          setBugs(res.data)
-      }
-
-    useEffect( () => {
-       getBugs()
-    },[]) 
+const Bugs = ({ bugs, }) => {
 
     const renderBugs = () => {
         return bugs.map( bug => <Bug key={bug.id} {...bug}/>)

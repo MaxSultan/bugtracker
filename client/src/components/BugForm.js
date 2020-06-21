@@ -20,7 +20,7 @@ export default function BugForm({ addBug, updateBug }){
       setAssignedTo('')
       setDeadline('')
       //TODO: let user know submit has worked by way of message or redirect to bugs page
-      // history.push('/')
+      history.push('/')
     }
 
     const handleChange = (e, { name, value }) => {

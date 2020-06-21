@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Reports({bugs}) {
+export default function Reports({ bugs }) {
 
     const activeBugs = () => {
         const active = bugs.filter(b => b.status !== 'closed')
