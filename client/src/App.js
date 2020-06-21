@@ -10,9 +10,10 @@ import Home from './components/Home';
 import Reports from './components/Reports';
 import axios from 'axios'
 import UserProfile from './components/User/UserProfile';
+import { BugConsumer } from './components/Bug/BugProvider'
 
 
-class  App extends React.Component {
+class App extends React.Component {
   state = {
     bugs:[]
   }
@@ -45,18 +46,22 @@ class  App extends React.Component {
 
   render(){
   return (
+    <BugConsumer>
+      {value => (
     <div className="App">
       <Navbar/>
       <Switch>
-        <Route exact path='/' render ={props => <Bugs {...props} bugs={this.state.bugs}/>}/>
+        <Route exact path='/' render ={props => <Bugs {...props} bugs={value.bugs}/>}/>
         <Route exact path='/add' render={props => <BugForm {...props} addBug={this.addBug} />}/>
-        <Route exact path='/reports' render={props => <Reports {...props} bugs={this.state.bugs}/>}/>
-        <Route exact path='/home' render={props => <Home {...props} bugs={this.state.bugs}/>}/>
-        <Route exact path='/user' render={props => <UserProfile {...props} bugs={this.state.bugs}/>}/>
+        <Route exact path='/reports' render={props => <Reports {...props} bugs={value.bugs}/>}/>
+        <Route exact path='/home' render={props => <Home {...props} bugs={value.bugs}/>}/>
+        <Route exact path='/user' render={props => <UserProfile {...props} bugs={value.bugs}/>}/>
         <Route exact path='/edit' render={props => <BugForm {...props} updateBug={this.updateBug} />}/>
       </Switch>
       <br/>
     </div>
+      )}
+    </BugConsumer>
   );
   }
 }

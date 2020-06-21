@@ -19,7 +19,6 @@ export default function BugForm({ addBug, updateBug }){
       setStatus('')
       setAssignedTo('')
       setDeadline('')
-      //TODO: let user know submit has worked by way of message or redirect to bugs page
       history.push('/')
     }
 

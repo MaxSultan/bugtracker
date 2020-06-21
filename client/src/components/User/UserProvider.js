@@ -25,6 +25,7 @@ export default class extends Component{
         active
         )
     }
+    
     componentDidMount(){
         axios.get('/api/bugs')
         .then(res => { 

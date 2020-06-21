@@ -5,13 +5,16 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
 import UserProvider from './components/User/UserProvider';
+import BugProvider from './components/Bug/BugProvider';
 
 ReactDOM.render(
-  <UserProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </UserProvider>,
+  <BugProvider>
+    <UserProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </UserProvider>
+  </BugProvider>,
   document.getElementById('root')
 );
 
