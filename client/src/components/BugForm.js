@@ -1,28 +1,16 @@
 import React, { useState } from 'react';
 import {Form, Container, Message} from 'semantic-ui-react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, Redirect, browserHistory, useHistory } from 'react-router-dom';
 
 export default function BugForm({ addBug, updateBug }){
     const location = useLocation();
-    const { id } = location.state
-    const {initName} = location.state
-    const {initStatus} = location.state
-    const {initAssignedTo} = location.state
-    const {initDeadline} = location.state
-
+    const history = useHistory();
+    const { id, initName, initStatus, initAssignedTo, initDeadline } = location.state
     const [name, setName] = useState(initName ? initName  : '')
     const [status, setStatus] = useState(initStatus ? initStatus : '')
     const [assignedTo,setAssignedTo] = useState(initAssignedTo ? initAssignedTo : '')
     const [deadline, setDeadline] = useState(initDeadline ? initDeadline : '')
   
-    const submitMessage = () => (
-      <Message positive size='massive' visible={true}>
-        <Message.Header>Completed</Message.Header>
-          <p>
-          Your bug has been updated/added to the system
-          </p>
-      </Message>
-    )
 
     const handleSubmit = (e) => {
       const bug = {name, status, assignedTo, deadline}
@@ -31,7 +19,8 @@ export default function BugForm({ addBug, updateBug }){
       setStatus('')
       setAssignedTo('')
       setDeadline('')
-      submitMessage()
+      //TODO: let user know submit has worked by way of message or redirect to bugs page
+      // history.push('/')
     }
 
     const handleChange = (e, { name, value }) => {

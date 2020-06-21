@@ -22,7 +22,7 @@ function App() {
 
   useEffect( () => {
     getBugs()
-  }, []) 
+  },[]) 
 
   async function updateBug(id, bugObj){
     const res = await axios.put(`/api/bugs/${id}`, {...bugObj})
@@ -38,11 +38,12 @@ function App() {
     const res = await axios.post('/api/bugs', bug)
     setBugs([res.data, ...bugs])
   }
+
   return (
     <div className="App">
       <Navbar/>
       <Switch>
-        <Route exact path='/' render ={(props) => <Bugs {...props} bugs={bugs} setBugs={setBugs}/>}/>
+        <Route exact path='/' render ={(props) => <Bugs {...props} bugs={bugs} setBugs={setBugs} getBugs={getBugs}/>}/>
         <Route exact path='/add' render={(props) => (<BugForm {...props} addBug={addBug} updateBug={updateBug}/>)}/>
         <Route exact path='/reports' render={(props => (<Reports {...props} bugs={bugs}/>))}/>
         <Route exact path='/home' render={(props) => (<Home {...props} bugs={bugs}/>)}/>
