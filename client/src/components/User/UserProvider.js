@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 export const UserContext = React.createContext()
 
@@ -12,6 +13,24 @@ export default class extends Component{
         membershipLevel: "Silver",
         updateUser: (user) => this.updateUser(user),
         bugs: [],
+        activeBugs: [],
+    }
+
+    activeBugs = () => {
+        const active = this.state.bugs.filter(b => b.status !== 'closed')
+        this.setState({
+            activeBugs: active
+        })
+        return (
+        active
+        )
+    }
+    componentDidMount(){
+        axios.get('/api/bugs')
+        .then(res => { 
+           this.setState({bugs: [res.data]})
+        })
+        .catch(err => {console.log(err)})
     }
 
     updateUser = (user) => {

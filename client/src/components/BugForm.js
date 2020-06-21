@@ -1,19 +1,37 @@
 import React, { useState } from 'react';
-import {Form, Container} from 'semantic-ui-react'
+import {Form, Container, Message} from 'semantic-ui-react'
+import { useLocation } from 'react-router-dom';
 
-export default function BugForm({ addBug }){
-    const [name, setName] = useState('')
-    const [status, setStatus] = useState('')
-    const [assignedTo,setAssignedTo] = useState('')
-    const [deadline, setDeadline] = useState('')
+export default function BugForm({ addBug, updateBug }){
+    const location = useLocation();
+    const { id } = location.state
+    const {initName} = location.state
+    const {initStatus} = location.state
+    const {initAssignedTo} = location.state
+    const {initDeadline} = location.state
+
+    const [name, setName] = useState(initName ? initName  : '')
+    const [status, setStatus] = useState(initStatus ? initStatus : '')
+    const [assignedTo,setAssignedTo] = useState(initAssignedTo ? initAssignedTo : '')
+    const [deadline, setDeadline] = useState(initDeadline ? initDeadline : '')
+  
+    const submitMessage = () => (
+      <Message positive size='massive' visible={true}>
+        <Message.Header>Completed</Message.Header>
+          <p>
+          Your bug has been updated/added to the system
+          </p>
+      </Message>
+    )
 
     const handleSubmit = (e) => {
       const bug = {name, status, assignedTo, deadline}
-      addBug(bug)
+      id ? updateBug(id, bug) : addBug(bug)
       setName('')
       setStatus('')
       setAssignedTo('')
       setDeadline('')
+      submitMessage()
     }
 
     const handleChange = (e, { name, value }) => {
@@ -34,10 +52,11 @@ export default function BugForm({ addBug }){
         { key: 'r', text: 'resolved', value: 'resolved' },
         { key: 'c', text: 'closed', value: 'closed'},
       ]
+
     return (
       <Container>
         <Form onSubmit={handleSubmit}>
-            <h1>Add Bug</h1>
+            { id ? <h1>Edit Bug</h1> : <h1>Add Bug</h1>}
             <Form.Input 
             required 
             placeholder={'Enter Bug Name'}
@@ -54,7 +73,7 @@ export default function BugForm({ addBug }){
             value={status}
             placeholder='Enter Bug Status'
             onChange={handleChange}
-          />
+            />
             <Form.Input 
             required 
             name='assignedTo'
@@ -71,7 +90,7 @@ export default function BugForm({ addBug }){
             value={deadline}
             onChange={handleChange}
             />
-            <Form.Button>Add Bug</Form.Button>
+            <Form.Button>{id ? 'Update Bug' : 'Add Bug'}</Form.Button>
         </Form>
         </Container>
     )

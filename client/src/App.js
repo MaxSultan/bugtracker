@@ -15,28 +15,27 @@ import UserProfile from './components/User/UserProfile';
 function App() {
   const [bugs, setBugs] = useState([])
 
+  async function getBugs(){
+    const res = await axios.get('/api/bugs')
+      setBugs(res.data)
+  }
+
   useEffect( () => {
-    axios.get('/api/bugs')
-    .then(res => { 
-        setBugs(res.data)
-    })
-    .catch(err => {console.log(err)})
+    getBugs()
   }, []) 
 
-  async function updateBug(id){
-    axios.put(`/api/bugs/${id}`)
-      .then( res => {
+  async function updateBug(id, bugObj){
+    const res = await axios.put(`/api/bugs/${id}`, {...bugObj})
         const updatedBugs = bugs.map( b => {
         if (b.id === res.data.id)
           return res.data;
         return b;
       });
       setBugs({ updatedBugs, });
-    })
   }
 
   async function addBug(bug){
-    const res = axios.post('/api/bugs', bug)
+    const res = await axios.post('/api/bugs', bug)
     setBugs([res.data, ...bugs])
   }
   return (
@@ -44,11 +43,11 @@ function App() {
       <Navbar/>
       <Switch>
         <Route exact path='/' render ={(props) => <Bugs {...props} bugs={bugs} setBugs={setBugs}/>}/>
-        <Route exact path='/add' render={(props) => (<BugForm {...props} addBug={addBug}/>)}/>
-        <Route exact path='/reports' component={Reports}/>
+        <Route exact path='/add' render={(props) => (<BugForm {...props} addBug={addBug} updateBug={updateBug}/>)}/>
+        <Route exact path='/reports' render={(props => (<Reports {...props} bugs={bugs}/>))}/>
         <Route exact path='/home' render={(props) => (<Home {...props} bugs={bugs}/>)}/>
         <Route exact path='/user' render={(props) => (<UserProfile {...props} bugs={bugs}/>)}/>
-        {/* <Route render={(props) => (<Search {...props} bugs={bugs}/>)}/> */}
+        <Route exact path='/edit' render={(props) => <BugForm {...props} updateBug={updateBug} />}/>
       </Switch>
       <br/>
     </div>

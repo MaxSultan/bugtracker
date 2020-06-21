@@ -1,6 +1,5 @@
-import React, {useState} from 'react'
+import React from 'react'
 import User from './User'
-import UserForm from './UserForm'
 
 
 export default function UserProfile() {

@@ -20,7 +20,16 @@ const Navbar = () => {
           <Icon name='bug'/>
         </Menu.Item>
       </NavLink>
-      <NavLink to="/add">
+      <NavLink to={{
+                            pathname: '/add',
+                            state: {
+                                id: false,
+                                initName: false,
+                                initStatus: false,
+                                initAssignedTo: false,
+                                initDeadline: false,
+                            }
+                            }}>
         <Menu.Item>
           <Icon name='add'/>
         </Menu.Item>

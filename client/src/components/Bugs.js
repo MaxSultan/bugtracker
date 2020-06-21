@@ -23,7 +23,16 @@ const Bugs = () => {
         <Container>
             <h1>BugTracker</h1>
             <Container>
-                <Button to='/add' color='black'><Link to='/add'>Add Bug</Link></Button>
+                <Button to='/add' color='black'><Link to={{
+                            pathname: '/add',
+                            state: {
+                                id: false,
+                                initName: false,
+                                initStatus: false,
+                                initAssignedTo: false,
+                                initDeadline: false,
+                            }
+                            }}>Add Bug</Link></Button>
             </Container>
         <Table celled>
             <Table.Header>
