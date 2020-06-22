@@ -10,13 +10,13 @@ export default class extends Component{
         bugs: [],
     }
 
-    componentDidMount(){
-        axios.get('/api/bugs')
-        .then(res => { 
-           this.setState({bugs: [res.data]})
-        })
-        .catch(err => {console.log(err)})
-    }
+    // componentDidMount(){
+    //     axios.get('/api/bugs')
+    //     .then(res => { 
+    //        this.setState({bugs: [res.data]})
+    //     })
+    //     .catch(err => {console.log(err)})
+    // }
 
     async componentDidMount(){
         const res = await axios.get('/api/bugs')
