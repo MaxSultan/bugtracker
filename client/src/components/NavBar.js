@@ -14,13 +14,13 @@ const Navbar = () => {
   return(
     <UserConsumer>
       {value => (
-    <Menu>
-      <NavLink to="/">
+    <Menu style={styles.navbar}>
+      <NavLink to="/" className='nav'>
         <Menu.Item>
-          <Icon name='bug'/>
+          <Icon name='bug' />
         </Menu.Item>
       </NavLink>
-      <NavLink to={{
+      <NavLink className='nav' to={{
                             pathname: '/add',
                             state: {
                                 id: false,
@@ -34,18 +34,18 @@ const Navbar = () => {
           <Icon name='add'/>
         </Menu.Item>
       </NavLink>
-      <NavLink to="/reports">
-        <Menu.Item>
+      <NavLink to="/reports" className='nav'>
+        <Menu.Item >
           <Icon name='chart line'/>
         </Menu.Item>
       </NavLink>
-      <NavLink to="/home">
+      <NavLink to="/home" className='nav'>
         <Menu.Item>
           <Icon name='home'/>
         </Menu.Item>
       </NavLink>
       <Menu.Menu position='right' style={{position:'relative', right:'100px'}}>
-      <NavLink to="/user" style={{display:'flex', justifySelf:'flex-end'}}>
+      <NavLink className='nav' to="/user" style={{display:'flex', justifySelf:'flex-end'}}>
         <Menu.Item>
           <Icon name='user'/>
           {value.username}
@@ -60,3 +60,9 @@ const Navbar = () => {
 }
 
 export default Navbar;
+
+const styles = {
+  navbar: {
+    backgroundColor: '#93A081',
+  },
+}

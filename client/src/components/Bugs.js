@@ -22,9 +22,9 @@ const Bugs = ({ getBugs, }) => {
 
     const TableExamplePositiveNegative = () => (
         <Container>
-            <h1>BugTracker</h1>
-            <Container>
-                <Button to='/add' color='black'><Link to={{
+            <div style={styles.top}>
+            <h1 style={styles.label}>BugTracker</h1>
+                <Button to='/add' style={styles.button}><Link style={styles.link} to={{
                             pathname: '/add',
                             state: {
                                 id: false,
@@ -34,14 +34,14 @@ const Bugs = ({ getBugs, }) => {
                                 initDeadline: false,
                             }
                             }}>Add Bug</Link></Button>
-            </Container>
-        <Table celled>
-            <Table.Header>
+            </div>
+        <Table celled >
+            <Table.Header >
                 <Table.Row>
-                    <Table.HeaderCell>Name</Table.HeaderCell>
-                    <Table.HeaderCell>Status</Table.HeaderCell>
-                    <Table.HeaderCell>Assigned To</Table.HeaderCell>
-                    <Table.HeaderCell>Deadline</Table.HeaderCell>
+                    <Table.HeaderCell style={styles.table}>Name</Table.HeaderCell>
+                    <Table.HeaderCell style={styles.table}>Status</Table.HeaderCell>
+                    <Table.HeaderCell style={styles.table}>Assigned To</Table.HeaderCell>
+                    <Table.HeaderCell style={styles.table}>Deadline</Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -58,3 +58,28 @@ const Bugs = ({ getBugs, }) => {
 
 
 export default Bugs;
+
+const styles = {
+    table: {
+        backgroundColor: '#3f5164',
+        color:'#d6d6e1',
+    },
+    button: {
+        backgroundColor: '#667582',
+        paddingRight: '40px',
+        paddingLeft:'40px',
+        marginTop: '60px',
+        marginBottom: '60px',
+    },
+    link:{
+        color: '#e5e3eb',
+    },
+    label:{
+        color:'#101c17',
+        fontSize: '100px',
+    },
+    top:{
+        display: 'flex',
+        justifyContent: 'space-around'
+    }
+}
