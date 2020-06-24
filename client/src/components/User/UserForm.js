@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import { Form, } from "semantic-ui-react";
-import { UserContext } from "./UserProvider";
+import { UserContext } from "../Provider/UserProvider";
 
 const UserForm= () =>  {
     const user = useContext(UserContext);

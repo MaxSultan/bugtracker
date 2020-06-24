@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
 import Bug from './Bug'
 import {Table, Container, Button, } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import BugProvider, { BugContext } from '../Provider/BugProvider';
 
-const Bugs = ({ bugs, }) => {
+const Bugs = () => {
+    const {bugs} =  useContext(BugContext)
+    console.log(bugs)
 
     const renderBugs = () => {
         return bugs.map( bug => <Bug key={bug.id} {...bug}/>)

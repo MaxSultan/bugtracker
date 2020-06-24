@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom'
-import UserProvider from './components/User/UserProvider';
-import BugProvider from './components/Bug/BugProvider';
+import UserProvider from './components/Provider/UserProvider';
+import BugProvider from './components/Provider/BugProvider';
 
 ReactDOM.render(
   <BugProvider>

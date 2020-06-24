@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, } from 'react-router-dom';
 import { Menu, Icon, Image } from "semantic-ui-react";
-import { UserConsumer } from './User/UserProvider';
+import { UserConsumer } from './Provider/UserProvider';
 
 const Navbar = () => {
   

@@ -5,7 +5,7 @@ export const BugContext = React.createContext()
 
 export const BugConsumer = BugContext.Consumer;
 
-export default class extends Component{
+export default class BugProvider extends Component{
     state = {
         bugs: [],
     }
@@ -20,15 +20,14 @@ export default class extends Component{
 
     async componentDidMount(){
         const res = await axios.get('/api/bugs')
-        console.log(res.data)
-          this.setState({bugs:res.data})
+          this.setState({ bugs: res.data })
       }
     
-      async componentDidUpdate(){
-        const res = await axios.get('/api/bugs')
-          this.setState({bugs:res.data})
-      }
-    
+      // async componentDidUpdate(){
+      //   const res = await axios.get('/api/bugs')
+      //     this.setState({bugs: res.data})
+      // }
+
       updateBug = (id, bugObj) => {
         const res = axios.put(`/api/bugs/${id}`, {...bugObj})
             const updatedBugs = this.state.bugs.map( b => {
@@ -46,7 +45,14 @@ export default class extends Component{
 
     render(){
         return(
-            <BugContext.Provider value={this.state}>
+            <BugContext.Provider 
+            
+            value={{
+            bugs: this.state.bugs,
+            add: this.addBug,
+            update: this.updateBug,
+          }}>
+            {console.log(this.state.bugs)}
                 {this.props.children}
             </BugContext.Provider>
         )

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {Form, Container, Message} from 'semantic-ui-react'
 import { useLocation, Redirect, browserHistory, useHistory } from 'react-router-dom';
+import { BugContext } from '../Provider/BugProvider';
 
 export default function BugForm({ addBug, updateBug }){
     const location = useLocation();
+    const { update, add } = useContext(BugContext)
     const history = useHistory();
     const { id, initName, initStatus, initAssignedTo, initDeadline } = location.state
     const [name, setName] = useState(initName ? initName  : '')
@@ -14,7 +16,7 @@ export default function BugForm({ addBug, updateBug }){
 
     const handleSubmit = (e) => {
       const bug = {name, status, assignedTo, deadline}
-      id ? updateBug(id, bug) : addBug(bug)
+      id ? update(id, bug) : add(bug)
       setName('')
       setStatus('')
       setAssignedTo('')

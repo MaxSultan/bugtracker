@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Card, Image, Button } from 'semantic-ui-react'
-import { UserConsumer } from './UserProvider'
+import { UserConsumer } from '../Provider/UserProvider'
 import UserForm from './UserForm'
 
 export default function User() {
